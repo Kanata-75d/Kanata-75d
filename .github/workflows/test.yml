@@ -1,0 +1,24 @@
+name: Build and Test
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup Rust
+      uses: rust-lang/setup-rust@v1
+      with:
+        rust-version: '1.65.0'
+    - name: Build
+      run: |-
+        cargo build --verbose
+        echo 'Build successful!'
+    - name: Test
+      run: |-
+        cargo test --verbose
+        echo 'Test successful!'
